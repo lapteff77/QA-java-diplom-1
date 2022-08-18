@@ -9,8 +9,7 @@ import praktikum.Bun;
 import praktikum.Burger;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -20,6 +19,7 @@ public class BurgerTest {
     Burger burger = new Burger();
     int index;
     int newIndex;
+    private static final float delta = 0;
 
     @Before
     public void movList() {
@@ -36,13 +36,12 @@ public class BurgerTest {
     @Mock
     Ingredient ingredient;
 
-
     @Test
     public void addIngredientTest() {
         int index = burger.ingredients.size();
         burger.addIngredient(ingredient);
         int newIndex = burger.ingredients.size();
-        assertEquals(index,(newIndex-1));
+        assertEquals(index, (newIndex - 1));
     }
 
     @Test
@@ -57,30 +56,30 @@ public class BurgerTest {
     public void moveIngredientTest() {
         index = 1;
         newIndex = 2;
-        Ingredient Expected = burger.ingredients.get(index);
+        Ingredient expected = burger.ingredients.get(index);
         burger.moveIngredient(index, newIndex);
-        Ingredient ActualOne = burger.ingredients.get(newIndex);
-        Ingredient ActualTwo = burger.ingredients.get(index);
-        assertEquals(Expected, ActualOne);
-        assertNotEquals(Expected, ActualTwo);
+        Ingredient actualOne = burger.ingredients.get(newIndex);
+        Ingredient actualTwo = burger.ingredients.get(index);
+        assertEquals(expected, actualOne);
+        assertNotEquals(expected, actualTwo);
     }
 
     @Test
-    public void getPriceTest()  {
+    public void getPriceTest() {
         burger.setBuns(bun);
-        burger.ingredients.add(new Ingredient(IngredientType.SAUCE, "Супер", 2.40F));
         Mockito.when(bun.getPrice()).thenReturn(10F);
-        burger.getPrice();
-        assertThat(burger.getPrice(), notNullValue());
+        float actual = burger.getPrice();
+        float expected = 1220F;
+        assertEquals(expected, actual, delta);
     }
 
     @Test
-    public void getReceiptTest()  {
+    public void getReceiptTest() {
         burger.setBuns(bun);
-        burger.ingredients.add(new Ingredient(IngredientType.SAUCE, "Супер", 2.40F));
         Mockito.when(bun.getName()).thenReturn("Супер");
-        burger.getReceipt();
-        assertThat(burger.getReceipt(), notNullValue());
+        boolean actual = burger.getReceipt().contains("Супер");
+        boolean expected = true;
+        assertEquals(expected, actual);
     }
 
     @After

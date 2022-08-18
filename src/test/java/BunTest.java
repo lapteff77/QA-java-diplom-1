@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class BunTest {
     String name = "Супер";
     float price = 2.40F;
+    private static final float delta = 0;
 
     @Test
     public void bunTestName() {
@@ -19,7 +20,7 @@ public class BunTest {
     public void bunTestPrice() {
         Bun bun = new Bun(name, price);
         float actual = bun.getPrice();
-        Assert.assertEquals(price, actual, 0);
+        Assert.assertEquals(price, actual, delta);
     }
 }
 

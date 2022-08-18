@@ -10,9 +10,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class IngredientTest {
 
-    public IngredientType type;
+    private final IngredientType type;
     private final String name;
     private final float price;
+    private static final float delta = 0;
 
     public IngredientTest(IngredientType type, String name, float price) {
         this.type = type;
@@ -46,7 +47,7 @@ public class IngredientTest {
     public void shouldIngredientPrice() {
         Ingredient ingredient = new Ingredient(type, name, price);
         float actual = ingredient.getPrice();
-        Assert.assertEquals(price,actual, 0);
+        Assert.assertEquals(price, actual, delta);
     }
 }
 
